@@ -28,8 +28,9 @@ int main(void)
     }
 
     // prefetch x and y arrays to the GPU
-    cudaMemPrefetchAsync(x, N*sizeof(float), 0, 0);
-    cudaMemPrefetchAsync(y, N*sizeof(float), 0, 0);
+    int deviceID = 0;
+    cudaMemPrefetchAsync(x, N*sizeof(float), deviceID);
+    cudaMemPrefetchAsync(y, N*sizeof(float), deviceID);
 
     int blockSize = 256;
     int numBlocks = (N + blockSize - 1) / blockSize;
